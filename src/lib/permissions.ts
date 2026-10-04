@@ -1,0 +1,69 @@
+import { UserRole } from './types';
+
+export type PermissionAction = 
+  | 'VIEW_DASHBOARD'
+  | 'MANAGE_PLAYERS'
+  | 'VIEW_SENSITIVE_DOCUMENTS'
+  | 'MANAGE_TEAMS'
+  | 'MANAGE_REGISTRATIONS'
+  | 'MANAGE_PAYMENTS'
+  | 'VERIFY_PAYMENTS'
+  | 'MANAGE_STAFF'
+  | 'MANAGE_CMS'
+  | 'MANAGE_SCHEDULES'
+  | 'MARK_ATTENDANCE'
+  | 'MANAGE_SETTINGS'
+  | 'VIEW_AUDIT_LOGS'
+  | 'EXPORT_DATA';
+
+const ROLE_PERMISSIONS: Record<UserRole, PermissionAction[]> = {
+  SUPER_ADMIN: [
+    'VIEW_DASHBOARD', 'MANAGE_PLAYERS', 'VIEW_SENSITIVE_DOCUMENTS', 'MANAGE_TEAMS',
+    'MANAGE_REGISTRATIONS', 'MANAGE_PAYMENTS', 'VERIFY_PAYMENTS', 'MANAGE_STAFF',
+    'MANAGE_CMS', 'MANAGE_SCHEDULES', 'MARK_ATTENDANCE', 'MANAGE_SETTINGS',
+    'VIEW_AUDIT_LOGS', 'EXPORT_DATA'
+  ],
+  ADMIN: [
+    'VIEW_DASHBOARD', 'MANAGE_PLAYERS', 'VIEW_SENSITIVE_DOCUMENTS', 'MANAGE_TEAMS',
+    'MANAGE_REGISTRATIONS', 'MANAGE_PAYMENTS', 'VERIFY_PAYMENTS', 'MANAGE_STAFF',
+    'MANAGE_CMS', 'MANAGE_SCHEDULES', 'MARK_ATTENDANCE', 'MANAGE_SETTINGS',
+    'VIEW_AUDIT_LOGS', 'EXPORT_DATA'
+  ],
+  MANAGER: [
+    'VIEW_DASHBOARD', 'MANAGE_PLAYERS', 'VIEW_SENSITIVE_DOCUMENTS', 'MANAGE_TEAMS',
+    'MANAGE_REGISTRATIONS', 'MANAGE_SCHEDULES', 'MARK_ATTENDANCE', 'EXPORT_DATA'
+  ],
+  COACH: [
+    'VIEW_DASHBOARD', 'MANAGE_PLAYERS', 'MANAGE_SCHEDULES', 'MARK_ATTENDANCE', 'EXPORT_DATA'
+  ],
+  ASSISTANT_COACH: [
+    'VIEW_DASHBOARD', 'MARK_ATTENDANCE'
+  ],
+  FINANCE_OFFICER: [
+    'VIEW_DASHBOARD', 'MANAGE_PAYMENTS', 'VERIFY_PAYMENTS', 'EXPORT_DATA'
+  ],
+  REGISTRATION_OFFICER: [
+    'VIEW_DASHBOARD', 'MANAGE_REGISTRATIONS', 'VIEW_SENSITIVE_DOCUMENTS', 'MANAGE_PLAYERS', 'EXPORT_DATA'
+  ],
+  CONTENT_MANAGER: [
+    'VIEW_DASHBOARD', 'MANAGE_CMS'
+  ],
+  VIEWER: [
+    'VIEW_DASHBOARD'
+  ]
+};
+
+export function hasPermission(role?: UserRole, action?: PermissionAction): boolean {
+  if (!role || !action) return false;
+  const permissions = ROLE_PERMISSIONS[role] || [];
+  return permissions.includes(action);
+}
+
+export function canViewSensitiveDocuments(role?: UserRole): boolean {
+  if (!role) return false;
+  return hasPermission(role, 'VIEW_SENSITIVE_DOCUMENTS');
+}
+
+export function getDefaultRolePermissions(): Record<UserRole, PermissionAction[]> {
+  return ROLE_PERMISSIONS;
+}
