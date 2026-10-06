@@ -19,6 +19,7 @@
     "esModuleInterop": true,
     "paths": {
       "@/*": ["./src/*"],
+      "next": ["./src/shims/next.ts"],
       "next/link": ["./src/shims/next-link.tsx"],
       "next/navigation": ["./src/shims/next-navigation.tsx"],
       "next/server": ["./src/shims/next-server.ts"]

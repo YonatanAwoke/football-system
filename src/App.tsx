@@ -21,6 +21,9 @@ import AdminSettingsPage from './app/admin/settings/page';
 import AdminUsersPage from './app/admin/users/page';
 import AdminAuditLogsPage from './app/admin/audit-logs/page';
 
+import AdminMatchesPage from './app/admin/matches/page';
+import { ProtectedRoute } from './components/auth/ProtectedRoute';
+
 export default function App() {
   return (
     <Routes>
@@ -31,21 +34,50 @@ export default function App() {
       <Route path="/upload-payment" element={<UploadPaymentPage />} />
       <Route path="/parent" element={<ParentPortalPage />} />
 
-      {/* Admin nested routes */}
-      <Route path="/admin" element={<AdminLayout />}>
+      {/* Admin nested routes protected by auth & RBAC */}
+      <Route 
+        path="/admin" 
+        element={
+          <ProtectedRoute>
+            <AdminLayout />
+          </ProtectedRoute>
+        }
+      >
         <Route index element={<Navigate to="/admin/dashboard" replace />} />
         <Route path="dashboard" element={<AdminDashboardPage />} />
         <Route path="players" element={<AdminPlayersPage />} />
         <Route path="teams" element={<AdminTeamsPage />} />
+        <Route path="matches" element={<AdminMatchesPage />} />
         <Route path="registrations" element={<AdminRegistrationsPage />} />
         <Route path="payments" element={<AdminPaymentsPage />} />
         <Route path="gallery" element={<Navigate to="/admin/cms?tab=gallery" replace />} />
         <Route path="cms" element={<AdminCMSPage />} />
         <Route path="notifications" element={<AdminNotificationsPage />} />
         <Route path="reports" element={<AdminReportsPage />} />
-        <Route path="settings" element={<AdminSettingsPage />} />
-        <Route path="users" element={<AdminUsersPage />} />
-        <Route path="audit-logs" element={<AdminAuditLogsPage />} />
+        <Route 
+          path="settings" 
+          element={
+            <ProtectedRoute requiredPermission="MANAGE_SETTINGS">
+              <AdminSettingsPage />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="users" 
+          element={
+            <ProtectedRoute requiredPermission="MANAGE_STAFF">
+              <AdminUsersPage />
+            </ProtectedRoute>
+          } 
+        />
+        <Route 
+          path="audit-logs" 
+          element={
+            <ProtectedRoute requiredPermission="VIEW_AUDIT_LOGS">
+              <AdminAuditLogsPage />
+            </ProtectedRoute>
+          } 
+        />
       </Route>
 
       {/* Catch-all fallback */}

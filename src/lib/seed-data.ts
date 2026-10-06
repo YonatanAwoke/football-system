@@ -1,6 +1,6 @@
 import { 
   User, Team, Player, Registration, PaymentTransaction, 
-  NotificationItem, GalleryAlbum, CMSContent, AuditLog, ClubSettings 
+  NotificationItem, GalleryAlbum, CMSContent, AuditLog, ClubSettings, Match 
 } from './types';
 
 export const initialClubSettings: ClubSettings = {
@@ -606,5 +606,84 @@ export const initialAuditLogs: AuditLog[] = [
     newValue: "AWAITING_PAYMENT",
     timestamp: "2026-08-26T11:00:00Z",
     ipAddress: "197.156.98.12"
+  }
+];
+
+export const initialMatches: Match[] = [
+  {
+    id: "MTC-20260901-1",
+    teamId: "TEAM-U13",
+    teamName: "U13 Premier",
+    opponent: "St. George Youth FC",
+    date: "2026-09-01",
+    time: "15:00",
+    location: "Abebe Bikila Stadium",
+    competition: "Addis Ababa Youth Premier Cup",
+    isHome: true,
+    scoreHome: 3,
+    scoreAway: 1,
+    status: "COMPLETED",
+    matchHalf: "Fulltime",
+    currentMinute: 90,
+    formation: "4-3-3",
+    motmPlayerId: "BFC-U13-0001",
+    motmPlayerName: "Yared Bekele",
+    startingXiIds: ["BFC-U13-0001", "BFC-U13-0002", "BFC-U13-0003", "BFC-U13-0004", "BFC-U13-0005"],
+    substituteIds: ["BFC-U13-0006", "BFC-U13-0007"],
+    events: [
+      { id: "EVT-101", type: "GOAL", playerId: "BFC-U13-0001", playerName: "Yared Bekele", minute: 14, notes: "Right-foot curled shot into top corner" },
+      { id: "EVT-102", type: "YELLOW", playerId: "BFC-U13-0003", playerName: "Samuel Tesfaye", minute: 28, notes: "Tactical foul on counter-attack" },
+      { id: "EVT-103", type: "GOAL", playerId: "OPPONENT", playerName: "St. George Youth FC Goal", minute: 41 },
+      { id: "EVT-104", type: "GOAL", playerId: "BFC-U13-0002", playerName: "Natnael Girma", minute: 67, notes: "Header from corner" },
+      { id: "EVT-105", type: "GOAL", playerId: "BFC-U13-0001", playerName: "Yared Bekele", minute: 84, notes: "Penalty conversion" }
+    ],
+    createdAt: "2026-09-01T17:00:00Z"
+  },
+  {
+    id: "MTC-20260910-2",
+    teamId: "TEAM-U15",
+    teamName: "U15 Cadets",
+    opponent: "Ethiopian Coffee Academy",
+    date: "2026-09-10",
+    time: "16:30",
+    location: "Bulbula Main Stadium Ground",
+    competition: "Sub-City Championship",
+    isHome: true,
+    scoreHome: 2,
+    scoreAway: 2,
+    status: "COMPLETED",
+    matchHalf: "Fulltime",
+    currentMinute: 90,
+    formation: "4-2-3-1",
+    motmPlayerId: "BFC-U15-0001",
+    motmPlayerName: "Abel Alemayehu",
+    startingXiIds: ["BFC-U15-0001", "BFC-U15-0002"],
+    substituteIds: [],
+    events: [
+      { id: "EVT-201", type: "GOAL", playerId: "BFC-U15-0001", playerName: "Abel Alemayehu", minute: 22 },
+      { id: "EVT-202", type: "GOAL", playerId: "OPPONENT", playerName: "Ethiopian Coffee Academy Goal", minute: 55 },
+      { id: "EVT-203", type: "GOAL", playerId: "BFC-U15-0001", playerName: "Abel Alemayehu", minute: 73 },
+      { id: "EVT-204", type: "GOAL", playerId: "OPPONENT", playerName: "Ethiopian Coffee Academy Goal", minute: 89 }
+    ],
+    createdAt: "2026-09-10T18:30:00Z"
+  },
+  {
+    id: "MTC-20261015-3",
+    teamId: "TEAM-U13",
+    teamName: "U13 Premier",
+    opponent: "Defence Force Youth",
+    date: "2026-10-15",
+    time: "15:30",
+    location: "Jan Meda Sports Ground",
+    competition: "Addis Ababa Youth Premier Cup",
+    isHome: false,
+    scoreHome: 0,
+    scoreAway: 0,
+    status: "UPCOMING",
+    formation: "4-3-3",
+    startingXiIds: ["BFC-U13-0001", "BFC-U13-0002", "BFC-U13-0003"],
+    substituteIds: ["BFC-U13-0004", "BFC-U13-0005"],
+    events: [],
+    createdAt: "2026-09-20T10:00:00Z"
   }
 ];

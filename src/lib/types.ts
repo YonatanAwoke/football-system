@@ -213,11 +213,35 @@ export interface TrainingSchedule {
   status: 'SCHEDULED' | 'COMPLETED' | 'CANCELLED' | 'RESCHEDULED';
 }
 
+export type TacticalFormation = 
+  | '4-3-3' 
+  | '4-2-3-1' 
+  | '4-4-2' 
+  | '3-5-2' 
+  | '3-4-3' 
+  | '5-3-2' 
+  | '4-1-4-1' 
+  | '4-5-1';
+
+export interface PitchSlot {
+  id: string;
+  roleName: string; // GK, LB, CB, RB, CDM, CM, CAM, LW, ST, RW etc.
+  x: number; // percentage from left 0 - 100
+  y: number; // percentage from top 0 - 100
+  playerId?: string;
+  isCaptain?: boolean;
+  isPenaltyTaker?: boolean;
+  isFreeKickTaker?: boolean;
+  isCornerTaker?: boolean;
+}
+
 export interface MatchEvent {
   id: string;
-  type: 'GOAL' | 'ASSIST' | 'YELLOW' | 'RED' | 'SUB_IN' | 'SUB_OUT';
+  type: 'GOAL' | 'ASSIST' | 'YELLOW' | 'RED' | 'SUB_IN' | 'SUB_OUT' | 'PENALTY_GOAL' | 'OWN_GOAL';
   playerId: string;
   playerName: string;
+  playerInId?: string;
+  playerInName?: string;
   minute: number;
   notes?: string;
 }
@@ -227,6 +251,7 @@ export interface Match {
   teamId: string;
   teamName: string;
   opponent: string;
+  opponentLogoUrl?: string;
   date: string;
   time: string;
   location: string;
@@ -234,7 +259,16 @@ export interface Match {
   isHome: boolean;
   scoreHome: number;
   scoreAway: number;
-  status: 'UPCOMING' | 'COMPLETED' | 'POSTPONED';
+  status: 'UPCOMING' | 'LIVE' | 'COMPLETED' | 'POSTPONED' | 'CANCELLED';
+  matchHalf?: '1st Half' | 'Halftime' | '2nd Half' | 'Fulltime' | 'Extra Time';
+  currentMinute?: number;
+  formation?: TacticalFormation;
+  pitchSlots?: PitchSlot[];
+  captainId?: string;
+  penaltyTakerId?: string;
+  freeKickTakerId?: string;
+  cornerTakerId?: string;
+  tacticalNotes?: string;
   motmPlayerId?: string;
   motmPlayerName?: string;
   startingXiIds: string[];

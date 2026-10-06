@@ -7,7 +7,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { 
   LayoutDashboard, Users, ClipboardList, CreditCard, Shield, Image, 
   Bell, Globe, UserCog, Settings, History, Search, Menu, X, LogOut,
-  BarChart3, ChevronDown, ChevronRight, UserCheck, ShieldCheck, Key, User as UserIcon
+  BarChart3, ChevronDown, ChevronRight, UserCheck, ShieldCheck, Key, User as UserIcon, Swords, Trophy
 } from 'lucide-react';
 import { User, NotificationItem } from '@/lib/types';
 import { useLanguage } from '@/context/LanguageContext';
@@ -233,6 +233,16 @@ export default function AdminLayout({ children }: { children?: React.ReactNode }
         { name: "Teams", href: "/admin/teams?tab=TEAMS" },
         { name: "Training Schedule", href: "/admin/teams?tab=SCHEDULE" },
         { name: "Attendance", href: "/admin/teams?tab=ATTENDANCE" },
+      ]
+    },
+    { 
+      name: "Matches & Tactics", 
+      href: "/admin/matches", 
+      icon: Swords,
+      subItems: [
+        { name: "Fixtures & Results", href: "/admin/matches" },
+        { name: "Tactical Lineup Board", href: "/admin/matches" },
+        { name: "Live Match Tracker", href: "/admin/matches" },
       ]
     },
     { 
