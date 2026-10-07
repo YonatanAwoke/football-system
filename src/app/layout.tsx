@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata } from "@/shims/next";
 import "./globals.css";
 import { LanguageProvider } from "@/context/LanguageContext";
 
