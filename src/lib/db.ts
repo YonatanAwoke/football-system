@@ -6,7 +6,7 @@ import {
 import { 
   initialClubSettings, initialUsers, initialTeams, initialPlayers, 
   initialRegistrations, initialPayments, initialNotifications, 
-  initialGalleryAlbums, initialCMSContent, initialAuditLogs 
+  initialGalleryAlbums, initialCMSContent, initialAuditLogs, initialMatches
 } from './seed-data';
 
 export interface DatabaseSchema {
@@ -41,6 +41,7 @@ function getInitialData(): DatabaseSchema {
     gallery: initialGalleryAlbums,
     cms: initialCMSContent,
     auditLogs: initialAuditLogs,
+    matches: initialMatches,
   };
 }
 
@@ -333,7 +334,11 @@ export function saveAttendanceSession(session: AttendanceSession): AttendanceSes
 // Matches Helpers
 export function getMatches(): Match[] {
   const db = getDatabase();
-  return db.matches || [];
+  if (!db.matches || db.matches.length === 0) {
+    db.matches = initialMatches;
+    saveDatabase(db);
+  }
+  return db.matches;
 }
 
 export function saveMatch(match: Match): Match {

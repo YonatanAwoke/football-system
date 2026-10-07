@@ -6,12 +6,13 @@ import { fileURLToPath, URL } from 'node:url';
 export default defineConfig({
   plugins: [react()],
   resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
-      'next/link': fileURLToPath(new URL('./src/shims/next-link.tsx', import.meta.url)),
-      'next/navigation': fileURLToPath(new URL('./src/shims/next-navigation.tsx', import.meta.url)),
-      'next/server': fileURLToPath(new URL('./src/shims/next-server.ts', import.meta.url)),
-    },
+    alias: [
+      { find: '@', replacement: fileURLToPath(new URL('./src', import.meta.url)) },
+      { find: 'next/link', replacement: fileURLToPath(new URL('./src/shims/next-link.tsx', import.meta.url)) },
+      { find: 'next/navigation', replacement: fileURLToPath(new URL('./src/shims/next-navigation.tsx', import.meta.url)) },
+      { find: 'next/server', replacement: fileURLToPath(new URL('./src/shims/next-server.ts', import.meta.url)) },
+      { find: 'next', replacement: fileURLToPath(new URL('./src/shims/next.ts', import.meta.url)) },
+    ],
   },
   server: {
     port: 3000,

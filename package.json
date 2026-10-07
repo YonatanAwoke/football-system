@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "bundle:offline": "node scripts/generate_single_html.cjs"
   },
   "keywords": [],
   "author": "",
